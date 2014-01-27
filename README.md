@@ -1,4 +1,3 @@
-current-flow
-============
 
-A webapp for checking the latest streamflows according to the USGS.
+# riverflows
+### USGS Stream data with an easy to use interface
