@@ -14,6 +14,7 @@ angular.module('myApp.controllers', [])
       $scope.riverData   = 'Loading...';
       $scope.riverName   = '';
       $scope.sites       = '';
+      $scope.heights     = '';
       $scope.searchSite  = '';
       $scope.searchState = '';
 
@@ -25,6 +26,14 @@ angular.module('myApp.controllers', [])
             .error(function(errorData, errorStatus){
                $scope.sites = errorData;
             });
+
+            $http.get("http://waterservices.usgs.gov/nwis/iv/?format=json&parameterCd=00065&stateCd="+$scope.searchState).success(function(data){
+               $scope.heights = data.value.timeSeries;
+            })
+            .error(function(errorData, errorStatus){
+               $scope.heights = errorData;
+            });
+
       }
 
 

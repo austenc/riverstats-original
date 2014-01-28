@@ -9,6 +9,12 @@ angular.module('myApp.filters', [])
       }
    }])
 
+   .filter('formatHeight', function() {
+      return function(data){
+         return data > 0 ? data+' <small class="text-muted"><em>(ft)</em></small>' : '-';
+      }
+   })
+
    .filter('reverse', function() {
       function toArray(list) {
          var k, out = [];

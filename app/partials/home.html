@@ -1,7 +1,7 @@
 <br>
 <div class="row">
 	<div class="col-md-6">
-		<select name="state" class="form-control" placeholder="Select One" data-ng-model="searchState" data-ng-change="updateSites()">
+		<select name="state" autofocus class="form-control" placeholder="Select One" data-ng-model="searchState" data-ng-change="updateSites()">
 			<option value="" selected="selected" disabled="disabled">Where are you?</option>
 			<option value="AL">Alabama</option>
 			<option value="AK">Alaska</option>
@@ -62,34 +62,21 @@
 </div>
 <br>
 <!-- <pre>{{sites | json}}</pre>
- --><div class="form-group">
-	<table class="table table-hover" data-ng-show="sites">
+ --><div class="form-group" ng-show="sites">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>Site Name</th>
-				<th>Streamflow</th>
+				<th class="text-center">Discharge</th>
+				<th class="text-center">Gage Height</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="site in sites | filter:{sourceInfo.siteName : searchSite}" ng-show="site.values[0].value[0].value > 0">
 				<td><span ng-bind-html="site.sourceInfo.siteName | highlight:searchSite"></span></td>
-				<td>{{site.values[0].value[0].value}} <small class="text-muted">ft&#179;/s</small></td>
+				<td class="text-center">{{site.values[0].value[0].value}} <small class="text-muted"><em>(ft&#179;/s)</em></small></td>
+				<td class="text-center" ng-bind-html="heights[$index].values[0].value[0].value | formatHeight"></td>
 			</tr>
 		</tbody>
 	</table>
 </div>
-
-<!--
-<hr>
-<hr>
-<h2>{{riverName}}</h2>
-<div ng-repeat="(key, data) in riverData track by $index">
-	<pre>{{data | json}}</pre>
-	<p>{{data.values[0].value[0].value}} CFS @ {{data.values[0].value[0].dateTime | date: 'medium'}}</p>
-</div>
-<h2>Home</h2>
-<p class="alert alert-success status good" ng-show-auth="login">Hello! You are logged in.</p>
-<p class="status alert alert-warning" ng-show-auth="logout">Not logged in</p>
-<p class="status error" ng-show-auth="error">{{auth.error}}</p>
-
--->
