@@ -11,7 +11,7 @@ angular.module('myApp.filters', [])
 
    .filter('formatHeight', function() {
       return function(data){
-         return data > 0 ? data+' <small class="text-muted"><em>(ft)</em></small>' : '-';
+         return data > 0 ? data+' <small class="text-muted"><em>(ft)</em></small>' : '<small class="text-muted">-</small>';
       }
    })
 
