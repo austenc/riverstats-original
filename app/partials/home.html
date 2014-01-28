@@ -72,7 +72,7 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="site in sites | filter:{sourceInfo.siteName : searchSite}" ng-show="site.values[0].value[0].value > 0">
-				<td>{{site.sourceInfo.siteName}}</td>
+				<td><span ng-bind-html="site.sourceInfo.siteName | highlight:searchSite"></span></td>
 				<td>{{site.values[0].value[0].value}} <small class="text-muted">ft&#179;/s</small></td>
 			</tr>
 		</tbody>

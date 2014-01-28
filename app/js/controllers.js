@@ -10,7 +10,7 @@ angular.module('myApp.controllers', [])
       }
    }])
 
-   .controller('HomeCtrl', ['$scope', '$http', 'syncData', function($scope, $http, syncData) {
+   .controller('HomeCtrl', ['$scope', '$http', function($scope, $http) {
       $scope.riverData   = 'Loading...';
       $scope.riverName   = '';
       $scope.sites       = '';
@@ -25,7 +25,6 @@ angular.module('myApp.controllers', [])
             .error(function(errorData, errorStatus){
                $scope.sites = errorData;
             });
-
       }
 
 
