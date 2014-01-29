@@ -42,38 +42,7 @@ angular.module('myApp.controllers', [])
             .error(function(errorData, errorStatus){
                $scope.temps = errorData;
             });
-      }
-
-
-
-      // get data from a site
-      $http.get("http://waterservices.usgs.gov/nwis/iv/?format=json&sites=01646500&parameterCd=00060,00065").success(function(data){ 
-         $scope.riverData = data.value.timeSeries;
-
-         angular.forEach($scope.riverData, function(value, key){
-            if($scope.riverName == '')
-               $scope.riverName = value.sourceInfo.siteName;            
-         });
-      })
-      .error(function(errorData, errorStatus){
-         $scope.riverData = errorData;
-      })      
-   }])
-
-  .controller('ChatCtrl', ['$scope', 'syncData', function($scope, syncData) {
-      $scope.newMessage = null;
-
-      // constrain number of messages by limit into syncData
-      // add the array into $scope.messages
-      $scope.messages = syncData('messages', 10);
-
-      // add new messages to the list
-      $scope.addMessage = function() {
-         if( $scope.newMessage ) {
-            $scope.messages.$add({text: $scope.newMessage});
-            $scope.newMessage = null;
-         }
-      };
+      }   
    }])
 
    .controller('LoginCtrl', ['$scope', 'loginService', '$location', function($scope, loginService, $location) {
