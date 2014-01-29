@@ -9,9 +9,24 @@ angular.module('myApp.filters', [])
       }
    }])
 
+
+
+
+   .filter('formatCFS', function() {
+      return function(data){
+         return data > 0 ? data+' <small class="text-muted"><em>(ft&#179;/s)</em></small>' : '<small class="text-muted">-</small>';
+      }
+   })
+
    .filter('formatHeight', function() {
       return function(data){
          return data > 0 ? data+' <small class="text-muted"><em>(ft)</em></small>' : '<small class="text-muted">-</small>';
+      }
+   })
+
+   .filter('formatTemp', function() {
+      return function(data){
+         return data > 0 ? data+' <small class="text-muted"><em>(&deg;F)</em></small>' : '<small class="text-muted">-</small>';
       }
    })
 

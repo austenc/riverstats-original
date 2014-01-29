@@ -73,13 +73,15 @@
 				<th>Site Name</th>
 				<th class="text-center">Discharge</th>
 				<th class="text-center">Gage Height</th>
+				<th class="text-center">Temperature</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="site in sites | filter:{sourceInfo.siteName : searchSite}" ng-show="site.values[0].value[0].value > 0">
+			<tr ng-repeat="site in sites | filter:{sourceInfo.siteName : searchSite}">
 				<td><span ng-bind-html="site.sourceInfo.siteName | highlight:searchSite"></span></td>
-				<td class="text-center">{{site.values[0].value[0].value}} <small class="text-muted"><em>(ft&#179;/s)</em></small></td>
+				<td class="text-center" ng-bind-html="site.values[0].value[0].value | formatCFS"></td>
 				<td class="text-center" ng-bind-html="heights[$index].values[0].value[0].value | formatHeight"></td>
+				<td class="text-center" ng-bind-html="temps[$index].values[0].value[0].value | formatTemp"></td>
 			</tr>
 		</tbody>
 	</table>

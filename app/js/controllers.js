@@ -20,6 +20,7 @@ angular.module('myApp.controllers', [])
 
       // All sites from a given state
       $scope.updateSites = function(){
+            // CFS Data
             $http.get("http://waterservices.usgs.gov/nwis/iv/?format=json&parameterCd=00060&stateCd="+$scope.searchState).success(function(data){
                $scope.sites = data.value.timeSeries;
             })
@@ -27,6 +28,7 @@ angular.module('myApp.controllers', [])
                $scope.sites = errorData;
             });
 
+            // Gage Height
             $http.get("http://waterservices.usgs.gov/nwis/iv/?format=json&parameterCd=00065&stateCd="+$scope.searchState).success(function(data){
                $scope.heights = data.value.timeSeries;
             })
@@ -34,6 +36,12 @@ angular.module('myApp.controllers', [])
                $scope.heights = errorData;
             });
 
+            $http.get("http://waterservices.usgs.gov/nwis/iv/?format=json&parameterCd=00011&stateCd="+$scope.searchState).success(function(data){
+               $scope.temps = data.value.timeSeries;
+            })
+            .error(function(errorData, errorStatus){
+               $scope.temps = errorData;
+            });
       }
 
 
