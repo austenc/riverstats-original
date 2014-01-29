@@ -10,11 +10,6 @@ angular.module('myApp.routes', ['ngRoute'])
          controller: 'HomeCtrl'
       });
 
-      $routeProvider.when('/chat', {
-         templateUrl: 'partials/chat.html',
-         controller: 'ChatCtrl'
-      });
-
       $routeProvider.when('/account', {
          authRequired: true, // must authenticate before viewing this page
          templateUrl: 'partials/account.html',

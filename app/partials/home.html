@@ -71,17 +71,17 @@
 		<thead>
 			<tr>
 				<th>Site Name</th>
-				<th class="text-center">Discharge</th>
-				<th class="text-center">Gage Height</th>
-				<th class="text-center">Temperature</th>
+				<th>Discharge</th>
+				<th>Gage Height</th>
+				<th>Temperature</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="site in sites | filter:{sourceInfo.siteName : searchSite}">
 				<td><span ng-bind-html="site.sourceInfo.siteName | highlight:searchSite"></span></td>
-				<td class="text-center" ng-bind-html="site.values[0].value[0].value | formatData:'(ft&#179;/s)'"></td>
-				<td class="text-center" ng-bind-html="heights[$index].values[0].value[0].value | formatData:'(ft)'"></td>
-				<td class="text-center" ng-bind-html="temps[$index].values[0].value[0].value | formatData:'(&deg;F)'"></td>
+				<td ng-bind-html="site.values[0].value[0].value | formatData:'(ft&#179;/s)'"></td>
+				<td ng-bind-html="heights[$index].values[0].value[0].value | formatData:'(ft)'"></td>
+				<td ng-bind-html="temps[$index].values[0].value[0].value | formatData:'(&deg;F)'"></td>
 			</tr>
 		</tbody>
 	</table>
