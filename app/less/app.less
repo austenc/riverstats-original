@@ -7,11 +7,68 @@
 /* ==========================================================================
    Basic Styles, put yours here!
    ========================================================================== */
+html{
+	height: 100%;
+	margin: 0;
+}
+body{
+	height: 100%;
+	background: #333 url('../img/bg.jpg') center center no-repeat;
+	-webkit-background-size: auto;
+	background-size: auto;
+	margin: 0;
+	padding: 0;
+}
+
+.navbar{
+	border-radius: 0px;
+	border: none;
+	background-color: rgba(236, 251, 255, 0.5);
+
+	.navbar-header{
+		text-align: center;
+		float: none;
+	}
+
+	.navbar-brand{
+		display: block;
+		margin: 0 auto;
+		color: #FFF;
+		float: none;
+		text-shadow: 1px 1px 0px #000;
+
+		&:hover{
+			cursor: pointer;
+			color: #95D6F5;
+		}
+	}
+	
+	.navbar-toggle{
+		display: none;
+	}
+}
+
+.heavy-shadow{
+	.box-shadow(0px 0px 20px #111);
+}
+
+.text-light{
+	color: #bbb;
+}
 
 /* ==========================================================================
    Media Queries, only included once a screen is a certain min width
    ========================================================================== */
+// 'Responsive' background
+@media (min-width: 1170px) {
+	body{
+		-webkit-background-size: 100%;
+		background-size: 100%;
+	}
+}
 
+
+// bootstrap breakpoints
 @media (min-width: @screen-sm-min) { }
 
 @media (min-width: @screen-md-min) { }
