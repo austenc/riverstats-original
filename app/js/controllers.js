@@ -36,6 +36,7 @@ angular.module('myApp.controllers', [])
                $scope.heights = errorData;
             });
 
+            // Temperature
             $http.get("http://waterservices.usgs.gov/nwis/iv/?format=json&parameterCd=00011&stateCd="+$scope.searchState).success(function(data){
                $scope.temps = data.value.timeSeries;
             })

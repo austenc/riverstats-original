@@ -4,7 +4,7 @@
   <!-- Default panel contents -->
   <div class="panel-heading">Find Your River</div>
 
-	<div class="panel-body">
+	<div class="panel-body bg-info">
 		<div class="row">
 			<div class="col-md-6">
 				<select name="state" autofocus class="form-control" placeholder="Select One" data-ng-model="searchState" data-ng-change="updateSites()">
@@ -63,7 +63,7 @@
 				</select>		
 			</div>
 			<div class="col-md-6">
-				<input type="text" class="form-control" placeholder="Search Flow Sites..." ng-model="searchSite">
+				<input type="text" class="form-control" id="search-site" placeholder="Search Flow Sites..." ng-model="searchSite">
 			</div>
 		</div>
 	</div>
