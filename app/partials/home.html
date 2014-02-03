@@ -74,6 +74,7 @@
 				<th>Discharge</th>
 				<th>Gage Height</th>
 				<th>Temperature</th>
+				<th>CFS Graph</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -82,7 +83,25 @@
 				<td ng-bind-html="site.values[0].value[0].value | formatData:'(ft&#179;/s)'"></td>
 				<td ng-bind-html="heights[$index].values[0].value[0].value | formatData:'(ft)'"></td>
 				<td ng-bind-html="temps[$index].values[0].value[0].value | formatData:'(&deg;F)'"></td>
+				<td>
+					<span class="text-muted text-center center-block" ng-hide="site.values[0].value[0].value > 0">Unavailable</span>
+					<button class="btn btn-primary center-block" ng-show="site.values[0].value[0].value > 0" ng-click="showGraph(site.sourceInfo.siteCode[0].value, site.sourceInfo.siteName)">
+						<span class="glyphicon glyphicon-stats"></span>
+						 Graph
+					</button>
+				</td>
 			</tr>
 		</tbody>
 	</table>
 </div>
+    <script type="text/ng-template" id="siteGraph.html">
+        <div class="modal-header">
+            <h3 ng-cloak>{{siteName}}</h3>
+        </div>
+        <div class="modal-body">
+			<img ng-src="http://waterdata.usgs.gov/nwisweb/graph?parm_cd=00060&site_no={{siteCode}}"  width="100%" alt="USGS Water-data graph for site {{siteCode}}"> 
+        </div>
+        <div class="modal-footer">        
+            <button class="btn btn-warning" ng-click="cancel()">Close</button>
+        </div>
+    </script>

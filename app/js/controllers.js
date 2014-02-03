@@ -10,7 +10,7 @@ angular.module('myApp.controllers', [])
       }
    }])
 
-   .controller('HomeCtrl', ['$scope', '$http', function($scope, $http) {
+   .controller('HomeCtrl', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
       $scope.riverData   = 'Loading...';
       $scope.riverName   = '';
       $scope.sites       = '';
@@ -18,8 +18,44 @@ angular.module('myApp.controllers', [])
       $scope.searchSite  = '';
       $scope.searchState = '';
 
+      // For graphs
+      $scope.siteCode    = '';
+      $scope.siteName    = '';
+
+      // Open a graph for a given site
+      $scope.showGraph = function(siteCode, siteName) {
+
+         $scope.siteCode = siteCode;
+         $scope.siteName = siteName;
+
+         var modalInstance = $modal.open({
+            templateUrl: 'siteGraph.html',
+            controller: ModalInstanceCtrl,
+            //windowClass: 'modal-large', // can't use .modal-lg because ui-bootstrap doesn't apply it to .modal-dialog but parent element instead
+            resolve: {
+              siteCode: function () {
+                return $scope.siteCode;
+              },
+              siteName: function () {
+                return $scope.siteName;
+              }
+            }
+         });
+      };
+
+      var ModalInstanceCtrl = function ($scope, $modalInstance, siteCode, siteName) {
+
+         $scope.siteCode = siteCode;
+         $scope.siteName = siteName;
+
+         $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+         };
+      };
+
+
       // All sites from a given state
-      $scope.updateSites = function(){
+      $scope.updateSites = function() {
             // CFS Data
             $http.get("http://waterservices.usgs.gov/nwis/iv/?format=json&parameterCd=00060&stateCd="+$scope.searchState).success(function(data){
                $scope.sites = data.value.timeSeries;
@@ -43,7 +79,8 @@ angular.module('myApp.controllers', [])
             .error(function(errorData, errorStatus){
                $scope.temps = errorData;
             });
-      }   
+      };
+
    }])
 
    .controller('LoginCtrl', ['$scope', 'loginService', '$location', function($scope, loginService, $location) {
