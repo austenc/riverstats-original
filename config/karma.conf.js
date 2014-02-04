@@ -11,7 +11,8 @@ module.exports = function(config){
          'test/lib/angular/angular-mocks.js',
          'app/js/**/*.js',
 //         'test/unit/**/*.js'
-         'test/unit/servicesSpec.js'
+         'test/unit/servicesSpec.js',
+         'test/unit/filtersSpec.js'
       ],
 
       autoWatch : true,

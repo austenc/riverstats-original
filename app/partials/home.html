@@ -80,7 +80,7 @@
 		<tbody>
 			<tr ng-repeat="site in sites | filter:{sourceInfo.siteName : searchSite}">
 				<td><span ng-bind-html="site.sourceInfo.siteName | highlight:searchSite"></span></td>
-				<td ng-bind-html="site.values[0].value[0].value | formatData:'(ft&#179;/s)'"></td>
+				<td ng-bind-html="site.values[0].value[0].value | formatData:'(ft&#179;/s)'"><p></p></td>
 				<td ng-bind-html="heights[$index].values[0].value[0].value | formatData:'(ft)'"></td>
 				<td ng-bind-html="temps[$index].values[0].value[0].value | formatData:'(&deg;F)'"></td>
 				<td>
