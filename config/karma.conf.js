@@ -10,9 +10,7 @@ module.exports = function(config){
          'test/lib/firebase/angularfire.js',
          'test/lib/angular/angular-mocks.js',
          'app/js/**/*.js',
-//         'test/unit/**/*.js'
-         'test/unit/servicesSpec.js',
-         'test/unit/filtersSpec.js'
+         'test/unit/**/*.js'
       ],
 
       autoWatch : true,

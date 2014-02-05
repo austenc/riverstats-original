@@ -11,8 +11,6 @@ angular.module('myApp.controllers', [])
    }])
 
    .controller('HomeCtrl', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
-      $scope.riverData   = 'Loading...';
-      $scope.riverName   = '';
       $scope.sites       = '';
       $scope.heights     = '';
       $scope.searchSite  = '';
