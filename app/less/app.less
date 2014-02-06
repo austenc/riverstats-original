@@ -4,22 +4,22 @@
 
 @import "bootstrap/bootstrap.less";
 
+
+// Some variables
+@stickyFooter: 40px;
+
 /* ==========================================================================
    Basic Styles, put yours here!
    ========================================================================== */
-html{
+html, body{
 	height: 100%;
-	margin: 0;
 }
 body{
-	height: 100%;
 	background: #1F2A2D url('../img/bg.jpg') center center no-repeat fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
-  	margin: 0;
-	padding: 0;
 }
 
 .navbar{
@@ -56,7 +56,12 @@ body{
 }
 
 .text-light{
-	color: #bbb;
+	text-shadow: 1px 1px 1px #000;
+	color: #fff;
+
+	a{
+		color: #A6E9FF;
+	}
 }
 
 // Specify modal size via ui-bootstrap's windowClass param for modals
@@ -64,6 +69,24 @@ body{
 	.modal-dialog{
 		width: @modal-lg;
 	}
+}
+
+// sticky footer
+#wrap {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -@stickyFooter;
+  /* Pad bottom by footer height */
+  padding: 0 0 @stickyFooter;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: @stickyFooter;
+  line-height: @stickyFooter;
+  
+  
 }
 
 /* ==========================================================================
