@@ -89,12 +89,21 @@ body{
   
 }
 
+// search box spacing on mobile
+.state-select-contain{
+	margin-bottom: 0.5em;
+}
+
 /* ==========================================================================
    Media Queries, only included once a screen is a certain min width
    ========================================================================== */
 
 // bootstrap breakpoints
-@media (min-width: @screen-sm-min) { }
+@media (min-width: @screen-sm-min) {
+	.state-select-contain{
+		margin-bottom: 0em;
+	}
+}
 
 @media (min-width: @screen-md-min) { }
 
