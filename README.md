@@ -4,6 +4,5 @@
 
 ## TODO
 * Get rid of hash in url 
-* Get rid of /home in url too?
 * Unit test controllers with $httpBackend
 * Add accounts / favorites
