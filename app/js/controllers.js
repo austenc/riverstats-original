@@ -10,15 +10,16 @@ angular.module('myApp.controllers', [])
       }
    }])
 
-   .controller('HomeCtrl', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
+   .controller('HomeCtrl', ['$scope', '$http', '$modal', '$cookieStore', function($scope, $http, $modal, $cookieStore) {
       $scope.sites       = '';
       $scope.heights     = '';
       $scope.searchSite  = '';
-      $scope.searchState = '';
+      $scope.searchState = $cookieStore.get('state');
 
       // For graphs
       $scope.siteCode    = '';
       $scope.siteName    = '';
+
 
       // Open a graph for a given site
       $scope.showGraph = function(siteCode, siteName) {
@@ -54,6 +55,9 @@ angular.module('myApp.controllers', [])
 
       // All sites from a given state
       $scope.updateSites = function() {
+            // Set cookie to remember the state selected at least!
+            $cookieStore.put('state', $scope.searchState)
+
             // CFS Data
             $http.get("http://waterservices.usgs.gov/nwis/iv/?format=json&parameterCd=00060&stateCd="+$scope.searchState).success(function(data){
                $scope.sites = data.value.timeSeries;
@@ -78,6 +82,11 @@ angular.module('myApp.controllers', [])
                $scope.temps = errorData;
             });
       };
+
+      // if the state is set by a cookie, load the sites by default for that state
+      if($scope.searchState != '')
+         $scope.updateSites();
+
 
    }])
 
