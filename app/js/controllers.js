@@ -84,7 +84,7 @@ angular.module('myApp.controllers', [])
       };
 
       // if the state is set by a cookie, load the sites by default for that state
-      if($scope.searchState != '')
+      if( ! angular.isUndefined($scope.searchState))
          $scope.updateSites();
 
 
