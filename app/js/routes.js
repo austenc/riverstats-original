@@ -21,5 +21,9 @@ angular.module('myApp.routes', ['ngRoute'])
          controller: 'LoginCtrl'
       });
 
+      $routeProvider.when('/privacy', {
+         templateUrl: 'partials/privacy.html'
+      });
+
       $routeProvider.otherwise({redirectTo: '/'});
    }]);
