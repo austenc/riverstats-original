@@ -10,7 +10,7 @@
       <a class="navbar-brand" href="/">River Stats</a>
     </div>
     <div class="collapse navbar-collapse" collapse="isCollapsed">
-      <ul class="menu nav navbar-nav">
+      <ul class="menu nav navbar-nav navbar-right">
 <!--
         <li>
           <a href="#/home" ng-click="isCollapsed = true">home</a>
@@ -18,18 +18,18 @@
          <li>
           <a href="#/chat" ng-click="isCollapsed = true">chat</a>
         </li>
-
-        <li ng-show-auth="logout,error">
-          <a href="#/login" ng-click="isCollapsed = true">login</a>
-        </li>
-        <li ng-show-auth="login">
-          <a href="#/account" ng-click="isCollapsed = true">account</a>
-        </li>
-        <li ng-show-auth="login">
-          <a href="#/logout" ng-click="isCollapsed = true; logout()">log out</a>
-        </li>
 -->
+        <li ng-show-auth="logout,error">
+          <a href="/login" ng-click="isCollapsed = true">login</a>
+        </li>
+        <li ng-show-auth="login">
+          <a href="/account" ng-click="isCollapsed = true">account</a>
+        </li>
+        <li ng-show-auth="login">
+          <a href="/logout" ng-click="isCollapsed = true; logout()">log out</a>
+        </li>
        </ul>
     </div><!--/.nav-collapse -->
+
   </div>
 </div>
