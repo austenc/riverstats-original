@@ -3,6 +3,8 @@
 ### USGS Stream data with an easy to use interface
 
 ## TODO
-* Get rid of hash in url 
+* UI that takes advantage of favorites
+	** create a directive for displaying favorites for current user!
+	
 * Unit test controllers with $httpBackend
-* Add accounts / favorites
+

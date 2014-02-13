@@ -10,16 +10,46 @@ angular.module('myApp.controllers', [])
       }
    }])
 
-   .controller('HomeCtrl', ['$scope', '$http', '$modal', '$cookieStore', function($scope, $http, $modal, $cookieStore) {
+   .controller('HomeCtrl', ['$scope', '$http', '$modal', '$cookieStore', 'syncData', function($scope, $http, $modal, $cookieStore, syncData) {
       $scope.sites       = '';
       $scope.heights     = '';
       $scope.searchSite  = '';
       $scope.searchState = $cookieStore.get('state');
+      $scope.favs        = new Array();
+
+      // User favorites
+      $scope.$watch('auth', function(auth) {
+         if($scope.auth.user != null)
+         {
+            $scope.favs = syncData('users').$child($scope.auth.user.uid).$child('favorites');
+         }
+      }, true); // true to compare object values instead of references
 
       // For graphs
       $scope.siteCode    = '';
       $scope.siteName    = '';
 
+      // FAVORITES
+      $scope.toggleFav = function(siteCode)
+      {
+         if( ! $scope.hasFavorite(siteCode))
+         {
+            // not in favs, add it
+            $scope.favs.$child(siteCode).$set(true);
+         }
+         else
+         {
+            // remove it from array
+            $scope.favs.$remove(siteCode);
+         }
+      }
+
+
+      $scope.hasFavorite = function(which)
+      {
+         var isFav = ($scope.favs.$getIndex().indexOf(which) != -1);
+         return isFav;
+      }      
 
       // Open a graph for a given site
       $scope.showGraph = function(siteCode, siteName) {
@@ -91,9 +121,9 @@ angular.module('myApp.controllers', [])
    }])
 
    .controller('LoginCtrl', ['$scope', 'loginService', '$location', function($scope, loginService, $location) {
-      $scope.email = null;
-      $scope.pass = null;
-      $scope.confirm = null;
+      $scope.email      = null;
+      $scope.pass       = null;
+      $scope.confirm    = null;
       $scope.createMode = false;
 
       $scope.login = function(cb) {
