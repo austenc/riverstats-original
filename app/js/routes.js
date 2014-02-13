@@ -6,29 +6,27 @@ angular.module('myApp.routes', ['ngRoute'])
    // which should only be available while logged in
     .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
       $routeProvider.when('/', {
-         templateUrl: 'partials/home.html',
+         templateUrl: '/partials/home.html',
          controller: 'HomeCtrl'
       });
 
       $routeProvider.when('/account', {
          authRequired: true, // must authenticate before viewing this page
-         templateUrl: 'partials/account.html',
+         templateUrl: '/partials/account.html',
          controller: 'AccountCtrl'
       });
 
       $routeProvider.when('/login', {
-         templateUrl: 'partials/login.html',
+         templateUrl: '/partials/login.html',
          controller: 'LoginCtrl'
       });
 
       $routeProvider.when('/privacy', {
-         templateUrl: 'partials/privacy.html'
+         templateUrl: '/partials/privacy.html'
       });
 
-     $routeProvider.otherwise({redirectTo: '/'});
+      $routeProvider.otherwise({redirectTo: '/'});
 
-     // if(window.history && window.history.pushState){
-     //   $locationProvider.html5Mode(true);
-     // }
-     
+      // Get rid of hash (#) in URL's
+      $locationProvider.html5Mode(true);     
    }]);
