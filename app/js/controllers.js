@@ -40,6 +40,7 @@ angular.module('myApp.controllers', [])
          if(($scope.auth.user != null) && (!!$scope.favs))
          {
             $scope.updateFavs();
+            $scope.favcodes = $scope.favs.$getIndex();
          }
       }, true);
 
@@ -126,6 +127,12 @@ angular.module('myApp.controllers', [])
                .error(function(errorData, errorStatus){
                   $scope.favtemps = errorData;
                });
+            }
+            else
+            {
+               $scope.favsites   = null;
+               $scope.favheights = null;
+               $scope.favtemps   = null
             }
       }
 
