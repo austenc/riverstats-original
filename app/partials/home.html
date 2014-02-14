@@ -1,8 +1,50 @@
 <br>
+<div class="panel panel-primary table-responsive heavy-shadow" ng-show="favsites && auth.user">
+	<div class="panel-heading">Your Favorites</div>
+	<div class="panel-body bg-info">
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<input type="text" class="form-control" id="search-site" placeholder="Filter Favorites..." ng-model="searchFavSites">
+			</div>
+		</div>
+	</div>	
+	<div class="table-main">
+		<table class="table table-hover table-striped table-bordered">
+			<thead>
+				<tr>
+					<th ng-show="auth.user"></th>
+					<th>Site Name</th>
+					<th>Discharge</th>
+					<th>Gage Height</th>
+					<th>Temperature</th>
+					<th>CFS Graph</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="site in favsites | filter:{sourceInfo.siteName : searchFavSites}">
+					<td ng-show="auth.user" class="text-center lead">
+						<div class="favorite" ng-class="{fav: favcodes.indexOf(site.sourceInfo.siteCode[0].value) != -1}" ng-click="toggleFav(site.sourceInfo.siteCode[0].value)"><span class="glyphicon glyphicon-star"></span></div>
+					</td>
+					<td><span ng-bind-html="site.sourceInfo.siteName | highlight:searchFavSites"></span></td>
+					<td ng-bind-html="site.values[0].value[0].value | formatData:'(ft&#179;/s)'"><p></p></td>
+					<td ng-bind-html="favheights[$index].values[0].value[0].value | formatData:'(ft)'"></td>
+					<td ng-bind-html="favtemps[$index].values[0].value[0].value | formatData:'(&deg;F)'"></td>
+					<td>
+						<span class="text-muted text-center center-block" ng-hide="site.values[0].value[0].value > 0">Unavailable</span>
+						<a class="btn bg-info center-block" ng-show="site.values[0].value[0].value > 0" ng-click="showGraph(site.sourceInfo.siteCode[0].value, site.sourceInfo.siteName)">
+							<span class="glyphicon glyphicon-stats"></span>
+							 CFS Graph
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
 
 <div class="panel panel-primary table-responsive heavy-shadow">
   <!-- Default panel contents -->
-  <div class="panel-heading">Find Your River</div>
+  <div class="panel-heading">Find A River</div>
 
 	<div class="panel-body bg-info">
 		<div class="row">
@@ -82,7 +124,7 @@
 			<tbody>
 				<tr ng-repeat="site in sites | filter:{sourceInfo.siteName : searchSite}">
 					<td ng-show="auth.user" class="text-center lead">
-						<div class="favorite" ng-class="{fav: hasFavorite(site.sourceInfo.siteCode[0].value)}" ng-click="toggleFav(site.sourceInfo.siteCode[0].value)"><span class="glyphicon glyphicon-star"></span></div>
+						<div class="favorite" ng-class="{fav: favcodes.indexOf(site.sourceInfo.siteCode[0].value) != -1}" ng-click="toggleFav(site.sourceInfo.siteCode[0].value)"><span class="glyphicon glyphicon-star"></span></div>
 					</td>
 					<td><span ng-bind-html="site.sourceInfo.siteName | highlight:searchSite"></span></td>
 					<td ng-bind-html="site.values[0].value[0].value | formatData:'(ft&#179;/s)'"><p></p></td>

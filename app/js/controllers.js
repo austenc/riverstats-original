@@ -16,14 +16,32 @@ angular.module('myApp.controllers', [])
       $scope.searchSite  = '';
       $scope.searchState = $cookieStore.get('state');
       $scope.favs        = new Array();
+      $scope.favcodes    = new Array();
 
       // User favorites
       $scope.$watch('auth', function(auth) {
          if($scope.auth.user != null)
          {
-            $scope.favs = syncData('users').$child($scope.auth.user.uid).$child('favorites');
+            $scope.favs     = syncData('users').$child($scope.auth.user.uid).$child('favorites');
+            $scope.favs.$on('loaded', function() {
+              $scope.favcodes = $scope.favs.$getIndex();
+            }); 
+
+         }
+         else
+         {
+            $scope.favs = new Array();
          }
       }, true); // true to compare object values instead of references
+
+
+      $scope.$watch('favs', function(favs){
+         // get the data for the favs 
+         if(($scope.auth.user != null) && (!!$scope.favs))
+         {
+            $scope.updateFavs();
+         }
+      }, true);
 
       // For graphs
       $scope.siteCode    = '';
@@ -47,8 +65,7 @@ angular.module('myApp.controllers', [])
 
       $scope.hasFavorite = function(which)
       {
-         var isFav = ($scope.favs.$getIndex().indexOf(which) != -1);
-         return isFav;
+         return ($scope.favs != null) ? ($scope.favs.$getIndex().indexOf(which) != -1) : false;
       }      
 
       // Open a graph for a given site
@@ -81,6 +98,36 @@ angular.module('myApp.controllers', [])
             $modalInstance.dismiss('cancel');
          };
       };
+
+      // Favorite sites
+      $scope.updateFavs = function() {
+            if($scope.favs.$getIndex().length > 0)
+            {
+               // CFS Data
+               $http.get("http://waterservices.usgs.gov/nwis/iv/?format=json&parameterCd=00060&sites="+$scope.favs.$getIndex().join()).success(function(data){
+                  $scope.favsites = data.value.timeSeries;
+               })
+               .error(function(errorData, errorStatus){
+                  $scope.favsites = errorData;
+               });
+
+               // Gage Height
+               $http.get("http://waterservices.usgs.gov/nwis/iv/?format=json&parameterCd=00065&sites="+$scope.favs.$getIndex().join()).success(function(data){
+                  $scope.favheights = data.value.timeSeries;
+               })
+               .error(function(errorData, errorStatus){
+                  $scope.favheights = errorData;
+               });
+
+               // Temperature
+               $http.get("http://waterservices.usgs.gov/nwis/iv/?format=json&parameterCd=00011&sites="+$scope.favs.$getIndex().join()).success(function(data){
+                  $scope.favtemps = data.value.timeSeries;
+               })
+               .error(function(errorData, errorStatus){
+                  $scope.favtemps = errorData;
+               });
+            }
+      }
 
 
       // All sites from a given state
