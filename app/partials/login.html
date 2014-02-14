@@ -1,9 +1,15 @@
 <div class="panel panel-default">
     <div class="panel-body">
 
-        <h2>Login Page</h2>
-
-        <form class="col-md-9">
+        <h2>Login</h2>
+    
+        <form class="col-sm-8">
+            <div class="alert alert-warning" ng-hide="createMode">
+                <p>Don't have an account? <a href="" ng-click="createMode = true">Create one now</a>.</p>
+            </div>
+            <div class="alert alert-info" ng-show="createMode">
+                <p>Enter your information below to create a new account.</p>
+            </div>
             <div class="form-group">
                 <label>email</label>
                 <input type="text" ng-model="email" class="form-control" />
@@ -17,12 +23,13 @@
                 <input type="password" ng-model="confirm" class="form-control" />
             </div>
             <button class="btn btn-primary" ng-click="login()" ng-hide="createMode">Log In</button>
-            <button class="btn btn-info" ng-click="createMode = true" ng-hide="createMode">Register</button>
-            <button class="btn btn-success" ng-cloak ng-show="createMode" ng-click="createAccount()">Create Account</button>
+            <button class="btn btn-info" ng-click="createMode = true" ng-hide="createMode">Create Account</button>
+            <button class="btn btn-success" ng-cloak ng-show="createMode" ng-click="createAccount()">Register</button>
             <button class="btn btn-danger" ng-cloak ng-show="createMode" ng-click="createMode = false">Cancel</button>
         
             <p ng-show="err" class="error">{{err}}</p>
         </form>
     </div>
+    <br>
 </div>
 
