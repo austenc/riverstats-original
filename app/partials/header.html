@@ -17,7 +17,7 @@
         <li ng-show-auth="login">
           <a href="/logout" ng-click="isCollapsed = true; logout()">log out</a>
         </li>
-        <li ng-show-auth="error,logout">
+        <li ng-hide="auth.user">
           <a href="/login" ng-click="isCollapsed = true">login</a>
         </li>
        </ul>
